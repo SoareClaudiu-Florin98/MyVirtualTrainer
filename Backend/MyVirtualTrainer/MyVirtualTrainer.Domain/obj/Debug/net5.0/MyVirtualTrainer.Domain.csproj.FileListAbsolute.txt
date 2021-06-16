@@ -1,0 +1,15 @@
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\bin\Debug\net5.0\MyVirtualTrainer.Domain.deps.json
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\bin\Debug\net5.0\MyVirtualTrainer.Domain.dll
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\bin\Debug\net5.0\ref\MyVirtualTrainer.Domain.dll
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\bin\Debug\net5.0\MyVirtualTrainer.Domain.pdb
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.csproj.AssemblyReference.cache
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.AssemblyInfoInputs.cache
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.AssemblyInfo.cs
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.csproj.CoreCompileInputs.cache
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.dll
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\ref\MyVirtualTrainer.Domain.dll
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.pdb
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\bin\Debug\net5.0\MyVirtualTrainer.Domain.runtimeconfig.json
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\bin\Debug\net5.0\MyVirtualTrainer.Domain.runtimeconfig.dev.json
+C:\Users\soare\source\repos\MyVirtualTrainer\Backend\MyVirtualTrainer\MyVirtualTrainer.Domain\obj\Debug\net5.0\MyVirtualTrainer.Domain.genruntimeconfig.cache
