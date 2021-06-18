@@ -1,0 +1,41 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family:'Lato', sans-serif ;  
+
+}
+.containerbaa{
+    margin-top: 5%;
+}
+.containerbaa h4{
+    color: #293250 ; 
+}
+.containerbaa h3{
+    text-align: center;
+}
+.containerbaa .buttonbaf{
+    margin-top: 10%;
+    margin-bottom: 10%;
+    
+}
+
+
+.containerbaa .beforeImg{
+    align-items: center;
+    border-radius:10% ; 
+    border: 5px solid #293250;   
+    padding:40% ;
+    background-color:white ; 
+    cursor:pointer;
+
+}
+
+.containerbaa .afterImg{
+    align-items: center;
+    border-radius:10% ; 
+    border: 5px solid #293250; 
+    padding:40% ;   
+    background-color:white ;  
+    cursor:pointer; 
+}
