@@ -1,9 +1,7 @@
-import React,{ useState} from "react";
+import React from "react";
 import "./Nav.css";
 import {Nav , Navbar  , NavDropdown, Container} from "react-bootstrap";
 import logo from "../Assets/logo_My_Virtual_Trainer.svg";
-import {  logout } from "../../api";
-import { Redirect } from "react-router-dom";
 
 
 

@@ -1,0 +1,114 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family:'Lato', sans-serif ;  
+
+}
+
+section{
+    width:100% ; 
+    min-height: 100vh;
+    background-color:#ddd ; 
+}
+.container-about{
+    width:80% ; 
+    display:block;
+    margin:auto ; 
+    padding-top: 100px;
+}
+.content-section{
+    float:left ; 
+    width: 55%;
+}
+.image-section{
+    float:right ; 
+    width:40% ; 
+}
+.image-section img{
+    width:100%;
+    height:auto ; 
+}
+.content-section .title{
+    text-transform: uppercase;
+    font-size:large;
+    color: rgb(56, 55, 55);
+    text-align: left;
+
+
+}
+.content-section .content h3{
+    margin-top:20px ;
+    color: rgb(117, 116, 116);
+    font-size:large ; 
+}
+.content-section .content p{
+    margin-top:10px ;
+    color: rgb(117, 116, 116);
+    font-size:medium ;
+    line-height: 1.5 ; 
+}
+.content-section .content .button {
+    margin-top:30px; 
+
+}
+.content-section .content .button a{
+    background-color: #3d3d3d ; 
+    padding:12px 40px; 
+    text-decoration: none;
+    color: #fff ; 
+    font-size: 25px;
+    letter-spacing:1.5px ; 
+}
+.content-section .content .button a:hover{
+    background-color: #293250 ; 
+    color:#fff ; 
+
+}
+.content-section .social{
+    margin: 40px 40px;
+}
+.content-section .social a{
+    color:  #293250 ;
+    font-size:30px ; 
+    padding : 0px ; 
+}
+@media (max-width: 800px){
+    .container-about{
+        width:80% ; 
+        display:block;
+        margin:auto ; 
+        padding-top: 50px;
+    }
+    .content-section{
+        float:none ; 
+        width: 100%;
+        display:block;
+        margin:auto ; 
+    }
+    .image-section{
+        float:none ; 
+        width: 100%;
+    }
+    .image-section img{
+        width: 100%;
+        height:auto ; 
+        display:block;
+        margin:auto ; 
+    }
+    .content-section .title{
+        text-align: center;
+        font-size: medium;
+    }
+    .content-section .content .button{
+        text-align: center;
+    }
+    .content-section .content .button a{
+        padding:9px 30px ; 
+    }
+    .content-section .social{
+        text-align: center;
+    }
+
+}
+
