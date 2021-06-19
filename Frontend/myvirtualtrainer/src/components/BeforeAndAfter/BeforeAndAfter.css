@@ -5,6 +5,7 @@
     font-family:'Lato', sans-serif ;  
 
 }
+
 .containerbaa{
     margin-top: 5%;
 }
@@ -22,20 +23,44 @@
 
 
 .containerbaa .beforeImg{
-    align-items: center;
-    border-radius:10% ; 
-    border: 5px solid #293250;   
-    padding:40% ;
+    padding:0px ;
+
+    margin: auto;
+    border: 5px solid #293250; 
+    justify-content: center;
+   
     background-color:white ; 
     cursor:pointer;
 
 }
-
 .containerbaa .afterImg{
-    align-items: center;
-    border-radius:10% ; 
+    padding:0px ;
+    margin: auto;   
+    justify-content: center;
+
     border: 5px solid #293250; 
-    padding:40% ;   
+      
     background-color:white ;  
     cursor:pointer; 
+}
+.containerbaa .beforeImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    padding:0px ;
+    
+
+    
+}
+.containerbaa .afterImg img{    
+    padding:0px ;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    
+    
 }
