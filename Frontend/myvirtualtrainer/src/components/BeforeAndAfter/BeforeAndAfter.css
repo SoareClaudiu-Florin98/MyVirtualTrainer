@@ -61,6 +61,7 @@
     object-fit: contain;
     display: block;
     margin: auto;
-    
-    
+}
+canvas{
+    width: 100%;
 }
