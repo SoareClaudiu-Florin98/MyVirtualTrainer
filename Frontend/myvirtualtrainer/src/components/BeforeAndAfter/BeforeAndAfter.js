@@ -7,6 +7,8 @@ import photo from "../Assets/photo.svg";
 const BeforeAndAfter = () => {
   const [beforeImg, setBeforeImg] = useState(photo);
   const [afterImg, setAfterImg] = useState(photo);
+  const [isDownloadable, setIsDownloadable] = useState(false);
+
   const hanfleBeforeChange=(event) => {
     const reader = new FileReader();
     reader.onload= () => {
@@ -17,7 +19,7 @@ const BeforeAndAfter = () => {
     reader.readAsDataURL(event.target.files[0]) ; 
     
   }
-  const hanfleAfterChange=(event) => {
+  const handleAfterChange=(event) => {
     const reader = new FileReader();
     reader.onload= () => {
       if(reader.readyState ===2){
@@ -77,12 +79,10 @@ const BeforeAndAfter = () => {
       let ctx = canvas.getContext('2d');
       ctx.drawImage(imageBeforeDraw, 0, 0,imgBeforeForCanvas.width,imgBeforeForCanvas.height );
       ctx.drawImage(imageAfterDraw, imgBeforeForCanvas.width, 0 ,imgBeforeForCanvas.width,imgBeforeForCanvas.height );
-      
+      setIsDownloadable(true) ; 
     }
   }
  
-
-
   return (
     <Container className="containerbaa" fluid>
       <Row xs={2} sm = {2} md={4} lg={6}   className="justify-content-md-center" id = "beforeAndAfterRow">
@@ -100,7 +100,7 @@ const BeforeAndAfter = () => {
           <div className="afterImg">
             <img src={afterImg} alt="PhotoAfter" rounded id="afterImgCanvas"/>          
           </div>
-          <input type="file" id = "input" onChange={hanfleAfterChange} accept="image/png, image/jpeg"></input>
+          <input type="file" id = "input" onChange={handleAfterChange} accept="image/png, image/jpeg"></input>
         </Col>
         
       </Row>
@@ -116,7 +116,7 @@ const BeforeAndAfter = () => {
       </Row>
       <Row xs={2} sm = {2} md={4} lg={6} className="justify-content-md-center">
         <Col>
-          <Button className="buttonbaf" variant="primary" onClick={handleDownloadClick} >Download</Button>
+          {isDownloadable && <Button className="buttonbaf" variant="primary" onClick={handleDownloadClick} >Download</Button>}
         </Col>
       </Row>
     </Container>
