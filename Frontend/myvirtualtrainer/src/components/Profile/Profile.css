@@ -1,0 +1,80 @@
+.containerProfile{
+
+    max-width: 50%;
+    border-radius: 5%;
+    margin: auto;
+    margin-top:5% ; 
+    width: 40%;
+    border: 1px solid #b3b3b3;
+    padding: 1%;
+    min-width :270px;
+
+}
+.gender{
+    font-size: 1.5rem;
+}
+hr{
+    height:2px;
+    border-width:0; 
+    background-color:	#4682B4 ; 
+
+}
+h1{
+
+    
+    color :	#4682B4; 
+    font-family:'Lato', sans-serif ;  
+  
+}
+.imgleft{
+    float: left;
+    border-radius: 50%;
+    max-width: 190px;
+    max-height: 190px;
+    min-width: 190px;
+    min-height: 190px;
+    width:auto ; 
+    height:auto;
+
+}
+@media (max-width: 768px) {
+    .containerProfile{
+        border: none;
+        margin-top:5% ; 
+    }
+
+}
+.custom-file-input2 {
+    color: transparent;
+  }
+  .custom-file-input2::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input2::before {
+    content: 'Select profile picture';
+    color: #293250;
+    display: inline-block;
+    background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+  .custom-file-input2:hover::before {
+    border-color: #293250;
+  }
+  .custom-file-input2:active {
+    outline: 0;
+  }
+  .custom-file-input2:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+  }
+  
+
+
