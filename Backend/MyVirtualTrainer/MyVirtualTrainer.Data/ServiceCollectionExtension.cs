@@ -14,7 +14,7 @@ namespace MyVirtualTrainer.Data
         public static IServiceCollection AddMyVirtualTrainerRepositories(this IServiceCollection services)
         {
             services.AddDbContext<MyVirtualTrainerDbContext>(
-            options => options.UseSqlServer(@"Data Source=localhost;Initial Catalog=MyVirtualTrainer;Integrated Security=True; MultipleActiveResultSets=true "));
+            options => options.UseSqlServer(@"Data Source=localhost;Initial Catalog=MyVirtualTrainer;Integrated Security=True; MultipleActiveResultSets=true ").EnableSensitiveDataLogging());
 
             return services;
         }

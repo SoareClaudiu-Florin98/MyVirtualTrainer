@@ -1,22 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyVirtualTrainer.Data.Migrations
 {
-    public partial class addName : Migration
+    public partial class profilePicture : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Name",
+            migrationBuilder.AddColumn<byte[]>(
+                name: "ProfilePicture",
                 table: "User",
-                type: "nvarchar(max)",
+                type: "varbinary(max)",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Name",
+                name: "ProfilePicture",
                 table: "User");
         }
     }

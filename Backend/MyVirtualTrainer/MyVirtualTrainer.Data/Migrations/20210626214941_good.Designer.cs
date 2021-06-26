@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyVirtualTrainer.Data.Database;
 
 namespace MyVirtualTrainer.Data.Migrations
 {
     [DbContext(typeof(MyVirtualTrainerDbContext))]
-    partial class MyVirtualTrainerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210626214941_good")]
+    partial class good
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,8 @@ namespace MyVirtualTrainer.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("varbinary(max)");
+                        .HasMaxLength(16)
+                        .HasColumnType("varbinary(16)");
 
                     b.Property<float>("Weight")
                         .HasColumnType("real");

@@ -20,13 +20,12 @@ namespace MyVirtualTrainer.Api.Controllers
             this.userService = userService;
 
         }
-        [Authorize]
         [Route("update")]
-        [HttpGet]
+        [HttpPut]
         public IActionResult UpdateUser([FromBody] User user )
         {
             userService.UpdateUser(user); 
-            return null;
+            return Ok(new { message= "succes"});
         }
 
 

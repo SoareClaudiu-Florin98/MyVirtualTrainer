@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyVirtualTrainer.Data.Database;
+using MyVirtualTrainer.Data.Entities;
 using MyVirtualTrainer.Data.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,15 @@ namespace MyVirtualTrainer.Data.Repositories
 
         public void Update(TEntity entity)
         {
-            database.Set<TEntity>().Update(entity);
+            if(entity.GetType() == typeof(User))
+            {
+                var changedEntriesCopy = database.ChangeTracker.Entries().ToList(); 
+
+                foreach (var entry in changedEntriesCopy)
+                    entry.State = EntityState.Detached;
+
+            }
+            database.Set<TEntity>().Update(entity);  
             database.SaveChanges();
         }
     }

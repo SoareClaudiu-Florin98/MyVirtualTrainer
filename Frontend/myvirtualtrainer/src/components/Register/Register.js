@@ -47,6 +47,7 @@ export default class Register extends Component {
             password: '',
             confirmPassword :'',
             error: false,
+            success: false,
             isError: {
                 name: '',
                 email: '',
@@ -75,12 +76,14 @@ export default class Register extends Component {
             .then(response => {
                 if (response) {
                     this.setState({
-                        error:false
+                        error:false,
+                        success:true
                     });
                 }
             })
             .catch(error => {
                 this.setState({
+                    success:false,
                     error: error.response.data.message     
                 });
             });
@@ -131,11 +134,12 @@ export default class Register extends Component {
     };
 
     render() {
-        const { isError ,error} = this.state;
+        const { isError ,error , success} = this.state;
 
         return (
             <Container className="containerRegister" fluid>
             {error && <Alert color="danger">{error}</Alert>}
+            {success &&<Alert color="success">Succesfully updated</Alert>}
             <Row>
               <Col xs={12} sm={6}>
                 <img  src={registerIcon} alt="" />

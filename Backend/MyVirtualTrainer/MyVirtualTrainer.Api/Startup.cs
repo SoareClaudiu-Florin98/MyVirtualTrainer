@@ -13,6 +13,7 @@ using MyVirtualTrainer.Api.Helpers;
 using MyVirtualTrainer.Api.Interfaces;
 using MyVirtualTrainer.Api.Services;
 using MyVirtualTrainer.Data;
+using MyVirtualTrainer.Data.Database;
 using MyVirtualTrainer.Data.Interfaces;
 using MyVirtualTrainer.Data.Repositories;
 using System;
@@ -60,6 +61,7 @@ namespace MyVirtualTrainer.Api
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<MyVirtualTrainerDbContext>(); 
             services.AddMyVirtualTrainerRepositories();
             services.AddMyVirtualTrainerServices();
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
