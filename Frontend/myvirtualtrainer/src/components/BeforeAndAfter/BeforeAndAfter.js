@@ -181,6 +181,17 @@ const BeforeAndAfter = () => {
             </Button>
           )}
         </Col>
+        <Col>
+          {isDownloadable && (
+            <Button
+              className="buttonbaf"
+              variant="primary"
+              onClick={handleDownloadClick}
+            >
+              Share
+            </Button>
+          )}
+        </Col>
       </Row>
     </Container>
   );
