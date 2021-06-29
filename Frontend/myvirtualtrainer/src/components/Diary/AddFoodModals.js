@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Modal, Button, Alert } from "react-bootstrap";
 import Axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import Food from "./Food"
+import Food from "./Food" ;
+
 const AddFoodModals = (props) => {
   const [query, setQuery] = useState("");
-  const [foods, setFoods] = useState([]);
+  const [food, setFood] = useState();
   const [alert, setAlert] = useState("");
 
   const APP_ID = "920eda1c";
@@ -14,11 +15,12 @@ const AddFoodModals = (props) => {
   const getData = async () => {
     if (query !== "") {
       const result = await Axios.get(url);
-      if (!result.data.more) {
-        return setAlert("No food with such name");
-      }
-      setFoods(result.data.hits);
+      setFood(result.data);
       setAlert("");
+      console.log(result.data.dietLabels)
+      if(result.data.dietLabels.length <1){
+        setAlert("Food not found!");
+      }
     } else {
       setAlert("Please fill the form");
     }
@@ -29,11 +31,17 @@ const AddFoodModals = (props) => {
 
   }
   const onChange = e => setQuery(e.target.value);
-  const { show, handleClose } = props;
+
+  const handleCloseButton =() =>{
+    props.handleClose()
+    setFood(null)  
+    setQuery("")
+
+  }
   return (
     <Modal
-      show={show}
-      onHide={handleClose}
+      show={props.show}
+      onHide={props.handleClose}
       size="lg"
       aria-labelledby="example-modal-sizes-title-lg"
       centered
@@ -55,16 +63,16 @@ const AddFoodModals = (props) => {
           <div class="break"></div>
           <input type="submit" value="Search" />
         </form>
-        <div className="recipes">
-          {foods !== [] &&
-            foods.map(food => <Food key={uuidv4()} food={food} />)}
-        </div>
+
+
+        {food&&< Food  food={food} />}
+
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" onClick={handleCloseButton }>
           Close
         </Button>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={props.handleClose}>
           Add Food
         </Button>
       </Modal.Footer>
