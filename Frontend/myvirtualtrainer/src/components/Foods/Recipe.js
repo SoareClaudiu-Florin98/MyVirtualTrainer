@@ -4,7 +4,7 @@ import RecipeDetails from "./RecipeDetails";
 const Recipe = ({ recipe }) => {
   const [show, setShow] = useState(false);
   const { label, image, url, ingredients } = recipe.recipe;
-
+ 
   return (
     <div className="recipe">
       <h3>{label}</h3>

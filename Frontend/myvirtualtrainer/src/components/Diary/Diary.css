@@ -1,0 +1,38 @@
+.containerDiary{
+
+    max-width: 50%;
+    margin: auto;
+    margin-top:5% ; 
+    width: 40%;
+    padding: 1%;
+    min-width :270px;
+    font-family:'Lato', sans-serif ;
+    
+      
+
+}
+#kcalValue{
+    text-align:right;
+    font-weight: bold;
+    font-size: large;
+    color: #4682B4;
+}
+#meals{
+    text-align:left;
+    font-weight: bold;
+    font-size: large;
+
+
+}
+.containerDiary hr{
+    background-color: rgb(78, 78, 78) ; 
+}
+.containerDiary button{
+    margin-top:1% ;
+    margin-bottom:1% ;
+    margin-left:0.5%; 
+}
+#generateReportsButton{
+    margin-top: 5%;
+    text-align: center;
+}

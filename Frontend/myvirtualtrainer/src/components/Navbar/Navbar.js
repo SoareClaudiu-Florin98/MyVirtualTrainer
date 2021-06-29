@@ -54,7 +54,6 @@ return(
 
 
 const Navigation = (props) => {
-  console.log(props)
 
   const { isLoggedIn, handleLogout } = props;
 
