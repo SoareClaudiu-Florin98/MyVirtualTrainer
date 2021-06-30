@@ -8,7 +8,6 @@ import {
 } from "reactstrap";
 
 const Food = ({ food ,mealType}) => {
-    console.log(mealType)
 
   return (
     <Container fluid >

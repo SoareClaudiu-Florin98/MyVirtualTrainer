@@ -40,8 +40,21 @@ const AddFoodModals = (props) => {
   }
 
   const handleAddFood= async() =>{
-   await  axios
-    .post("https://localhost:44361/user/updateFood", {
+
+   getUser().then((data) => {  axios
+    .put("https://localhost:44361/user/updateFood", {
+      id: data.id, 
+      password: data.password,
+      email:data.email,
+      name: data.name ,              
+      weight: data.weight,
+      height: data.height,
+      birthday : data.birthday,
+      activityLevel: data.activityLevel,
+      profilePicture : data.profilePicture,               
+      gender: data.gender,
+      foods:[ {
+          name : query,
           calories : food.calories,
           weight : food.totalWeight,
           carbs: food.totalNutrients.CHOCDF.quantity.toFixed(2),
@@ -51,14 +64,17 @@ const AddFoodModals = (props) => {
           calcium : food.totalNutrients.CA.quantity.toFixed(2),
           date :  new Date(),
           mealType : props.mealType
+      }]
     },{
       withCredentials: true
     })
     .then(response => {
+      
 
     })
     .catch(error => {
     });
+  })
   props.handleClose()
   setFood(null)  
   setQuery("")

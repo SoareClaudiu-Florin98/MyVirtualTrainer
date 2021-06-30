@@ -12,6 +12,7 @@ namespace MyVirtualTrainer.Data.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string Name { get; set; }
         public int Calories { get; set; }
         public float Weight { get; set; }
         public float Carbs { get; set;  }
@@ -21,5 +22,10 @@ namespace MyVirtualTrainer.Data.Entities
         public float Calcium { get; set; }
         public string MealType { get; set; }
         public DateTime Date { get; set; }
+
+        public virtual User IdUser { get; set; }
+
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
     }
 }

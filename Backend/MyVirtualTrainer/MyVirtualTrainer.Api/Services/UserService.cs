@@ -16,14 +16,16 @@ using System.Threading.Tasks;
 
 namespace MyVirtualTrainer.Api.Services
 {
-    public class UserService : IUserService
+    public class FoodrService : IUserService
     {
         private readonly IUserRepository userRepository;
+        private readonly IFoodService foodService;
         private readonly AppSettings appSettings;
-        public UserService(IOptions<AppSettings> appSettings, IUserRepository userRepository)
+        public FoodrService(IOptions<AppSettings> appSettings, IUserRepository userRepository, IFoodService foodService)
         {
             this.appSettings = appSettings.Value;
             this.userRepository = userRepository;
+            this.foodService = foodService; 
 
         }
 
@@ -135,5 +137,6 @@ namespace MyVirtualTrainer.Api.Services
             if (!userRepository.ExistsEmail(user)) { return false; }
             return true;
         }
+
     }
 }

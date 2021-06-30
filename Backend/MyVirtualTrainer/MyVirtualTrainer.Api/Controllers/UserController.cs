@@ -14,10 +14,12 @@ namespace MyVirtualTrainer.Api.Controllers
     public class UserController : Controller
     {
         private readonly IUserService userService;
-        public UserController(IUserService userService)
+        private readonly IFoodService foodService;
+        public UserController(IUserService userService , IFoodService foodService)
         {
 
             this.userService = userService;
+            this.foodService = foodService; 
 
         }
         [Route("update")]
@@ -28,41 +30,21 @@ namespace MyVirtualTrainer.Api.Controllers
             return Ok(new { message= "succes"});
         }
         [Route("updateFood")]
-        [HttpPost]
-        public IActionResult UpdateUserFood([FromBody] Food food)
+        [HttpPut]
+        public IActionResult UpdateUserFood([FromBody]  User user)
         {
-            var contextUser =(User) HttpContext.Items["User"];
 
-            var foods = contextUser.Foods;
-            if (foods != null)
-            {
-                foods.Add(new Food
-                {
-                    Calories = food.Calories,
-                    Weight = food.Weight,
-                    Protein = food.Protein,
-                    Calcium = food.Calcium,
-                    Carbs = food.Carbs,
-                    Date = food.Date,
-                    Fat = food.Fat,
-                    Fiber = food.Fiber,
-                    MealType = food.MealType
-                });
-
-            }
-            else
-            {
-                ICollection<Food> newFoods = new List<Food>();
-                newFoods.Add(food);
-                foods = newFoods; 
-            }
-
-            contextUser.Foods = foods; 
-            userService.UpdateUser(contextUser); 
-
+            userService.UpdateUser(user); 
             return Ok(new { message = "succes" });
         }
+        [Route("getFood/{userId}")]
+        [HttpGet]
+        public IActionResult GetUserFoods(int userId)
+        {
 
+                return Ok(foodService.GetByUserId(userId));
 
+        }
     }
+
 }

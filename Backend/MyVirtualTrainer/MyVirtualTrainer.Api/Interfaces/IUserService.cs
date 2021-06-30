@@ -18,6 +18,6 @@ namespace MyVirtualTrainer.Api.Interfaces
         bool IsValidEmail(User user);
         bool IsValidName(User user);
 
-        public bool ExistEmail(User user); 
+        public bool ExistEmail(User user);
     }
 }

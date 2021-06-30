@@ -60,7 +60,13 @@ namespace MyVirtualTrainer.Api
                 });
 
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserService, FoodrService>();
+
+
+            services.AddScoped<IFoodRepository, FoodRepository>();
+
+            services.AddScoped<IFoodService, FoodService>();
+
             services.AddScoped<MyVirtualTrainerDbContext>(); 
             services.AddMyVirtualTrainerRepositories();
             services.AddMyVirtualTrainerServices();

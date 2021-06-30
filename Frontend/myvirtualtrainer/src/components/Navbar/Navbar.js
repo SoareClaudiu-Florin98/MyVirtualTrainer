@@ -2,6 +2,7 @@ import React from "react";
 import "./Nav.css";
 import {Nav , Navbar  , NavDropdown, Container} from "react-bootstrap";
 import logo from "../Assets/logo_My_Virtual_Trainer.svg";
+import { Redirect } from "react-router-dom";
 
 
 
@@ -10,6 +11,7 @@ const MenuIsLoggedIn = props => {
   const onLogout = () => {
     document.cookie ="jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     props.handleLogout();
+    <Redirect to="/" />
 };
 return(
 <React.Fragment>
