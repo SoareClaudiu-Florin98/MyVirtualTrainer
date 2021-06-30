@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyVirtualTrainer.Data.Database;
 
 namespace MyVirtualTrainer.Data.Migrations
 {
     [DbContext(typeof(MyVirtualTrainerDbContext))]
-    partial class MyVirtualTrainerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210629234440_semi-complete-database2")]
+    partial class semicompletedatabase2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,32 +66,6 @@ namespace MyVirtualTrainer.Data.Migrations
                     b.ToTable("Food");
                 });
 
-            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Post");
-                });
-
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -135,16 +111,6 @@ namespace MyVirtualTrainer.Data.Migrations
                         .WithMany("Foods")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Post", b =>
-                {
-                    b.HasOne("MyVirtualTrainer.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.User", b =>

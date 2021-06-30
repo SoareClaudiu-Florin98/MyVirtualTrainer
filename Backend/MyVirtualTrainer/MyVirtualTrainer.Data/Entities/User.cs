@@ -24,5 +24,7 @@ namespace MyVirtualTrainer.Data.Entities
 
         public byte[] ProfilePicture { get; set; }
 
+        public virtual ICollection<Food> Foods { get; set; }
+
     }
 }

@@ -27,6 +27,41 @@ namespace MyVirtualTrainer.Api.Controllers
             userService.UpdateUser(user); 
             return Ok(new { message= "succes"});
         }
+        [Route("updateFood")]
+        [HttpPost]
+        public IActionResult UpdateUserFood([FromBody] Food food)
+        {
+            var contextUser =(User) HttpContext.Items["User"];
+
+            var foods = contextUser.Foods;
+            if (foods != null)
+            {
+                foods.Add(new Food
+                {
+                    Calories = food.Calories,
+                    Weight = food.Weight,
+                    Protein = food.Protein,
+                    Calcium = food.Calcium,
+                    Carbs = food.Carbs,
+                    Date = food.Date,
+                    Fat = food.Fat,
+                    Fiber = food.Fiber,
+                    MealType = food.MealType
+                });
+
+            }
+            else
+            {
+                ICollection<Food> newFoods = new List<Food>();
+                newFoods.Add(food);
+                foods = newFoods; 
+            }
+
+            contextUser.Foods = foods; 
+            userService.UpdateUser(contextUser); 
+
+            return Ok(new { message = "succes" });
+        }
 
 
     }

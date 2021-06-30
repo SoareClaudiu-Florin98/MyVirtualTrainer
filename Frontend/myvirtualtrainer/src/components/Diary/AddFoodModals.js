@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { Modal, Button, Alert } from "react-bootstrap";
-import Axios from "axios";
+import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Food from "./Food" ;
-
+import { getUser } from "../../api";
 const AddFoodModals = (props) => {
   const [query, setQuery] = useState("");
   const [food, setFood] = useState();
   const [alert, setAlert] = useState("");
+
 
   const APP_ID = "920eda1c";
   const APP_KEY = "ca59bf0c04be445009d892bb34983cb5";
   const url = `https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&nutrition-type=logging&ingr=${query}`;
   const getData = async () => {
     if (query !== "") {
-      const result = await Axios.get(url);
+      const result = await axios.get(url);
       setFood(result.data);
       setAlert("");
       console.log(result.data.dietLabels)
@@ -36,8 +37,34 @@ const AddFoodModals = (props) => {
     props.handleClose()
     setFood(null)  
     setQuery("")
-
   }
+
+  const handleAddFood= async() =>{
+   await  axios
+    .post("https://localhost:44361/user/updateFood", {
+          calories : food.calories,
+          weight : food.totalWeight,
+          carbs: food.totalNutrients.CHOCDF.quantity.toFixed(2),
+          fat:food.totalNutrients.FAT.quantity.toFixed(2),
+          fiber :  food.totalNutrients.FIBTG.quantity.toFixed(2),
+          protein :food.totalNutrients.PROCNT.quantity.toFixed(2) ,
+          calcium : food.totalNutrients.CA.quantity.toFixed(2),
+          date :  new Date(),
+          mealType : props.mealType
+    },{
+      withCredentials: true
+    })
+    .then(response => {
+
+    })
+    .catch(error => {
+    });
+  props.handleClose()
+  setFood(null)  
+  setQuery("")
+}
+
+
   return (
     <Modal
       show={props.show}
@@ -47,7 +74,7 @@ const AddFoodModals = (props) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="example-modal-sizes-title-lg">Add Food</Modal.Title>
+        <Modal.Title id="example-modal-sizes-title-lg">Add Food {props.mealType}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {alert !== "" && <Alert color="danger">{alert}</Alert>}
@@ -65,14 +92,14 @@ const AddFoodModals = (props) => {
         </form>
 
 
-        {food&&< Food  food={food} />}
+        {food&&< Food mealType ={props.mealType} food={food} />}
 
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseButton }>
           Close
         </Button>
-        <Button variant="primary" onClick={props.handleClose}>
+        <Button variant="primary" onClick={handleAddFood}>
           Add Food
         </Button>
       </Modal.Footer>

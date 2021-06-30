@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyVirtualTrainer.Data.Database;
 
 namespace MyVirtualTrainer.Data.Migrations
 {
     [DbContext(typeof(MyVirtualTrainerDbContext))]
-    partial class MyVirtualTrainerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210629230631_semi-complete-database")]
+    partial class semicompletedatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,6 +21,41 @@ namespace MyVirtualTrainer.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.DailyReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DiaryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiaryId");
+
+                    b.ToTable("DailyReport");
+                });
+
+            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Diary", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Diary");
+                });
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Food", b =>
                 {
@@ -36,8 +73,8 @@ namespace MyVirtualTrainer.Data.Migrations
                     b.Property<float>("Carbs")
                         .HasColumnType("real");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("DailyReportId")
+                        .HasColumnType("int");
 
                     b.Property<float>("Fat")
                         .HasColumnType("real");
@@ -51,43 +88,14 @@ namespace MyVirtualTrainer.Data.Migrations
                     b.Property<float>("Protein")
                         .HasColumnType("real");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.Property<float>("Weight")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("DailyReportId");
 
                     b.ToTable("Food");
-                });
-
-            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Post");
                 });
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.User", b =>
@@ -102,6 +110,9 @@ namespace MyVirtualTrainer.Data.Migrations
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("DiaryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -126,30 +137,45 @@ namespace MyVirtualTrainer.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DiaryId");
+
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.DailyReport", b =>
+                {
+                    b.HasOne("MyVirtualTrainer.Data.Entities.Diary", null)
+                        .WithMany("DailyReport")
+                        .HasForeignKey("DiaryId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Food", b =>
                 {
-                    b.HasOne("MyVirtualTrainer.Data.Entities.User", null)
+                    b.HasOne("MyVirtualTrainer.Data.Entities.DailyReport", null)
                         .WithMany("Foods")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("DailyReportId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Post", b =>
-                {
-                    b.HasOne("MyVirtualTrainer.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.User", b =>
                 {
+                    b.HasOne("MyVirtualTrainer.Data.Entities.Diary", "Diary")
+                        .WithMany()
+                        .HasForeignKey("DiaryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Diary");
+                });
+
+            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.DailyReport", b =>
+                {
                     b.Navigation("Foods");
+                });
+
+            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Diary", b =>
+                {
+                    b.Navigation("DailyReport");
                 });
 #pragma warning restore 612, 618
         }

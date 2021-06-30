@@ -16,6 +16,8 @@ namespace MyVirtualTrainer.Data.Database
 
         }
         public DbSet<User> User { get; set; }
+        public DbSet<Food> Food { get; set; }
+        public DbSet<Post> Post { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
