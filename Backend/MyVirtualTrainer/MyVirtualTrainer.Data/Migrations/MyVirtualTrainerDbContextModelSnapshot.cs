@@ -74,21 +74,22 @@ namespace MyVirtualTrainer.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Post");
                 });
@@ -141,16 +142,6 @@ namespace MyVirtualTrainer.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("IdUser");
-                });
-
-            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Post", b =>
-                {
-                    b.HasOne("MyVirtualTrainer.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.User", b =>

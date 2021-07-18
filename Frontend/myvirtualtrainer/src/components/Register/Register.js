@@ -60,7 +60,6 @@ export default class Register extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        console.log("Sunt aiciii")
 
 
         if (formValid(this.state) && this.state.confirmPassword === this.state.password) {
@@ -139,7 +138,7 @@ export default class Register extends Component {
         return (
             <Container className="containerRegister" fluid>
             {error && <Alert color="danger">{error}</Alert>}
-            {success &&<Alert color="success">Succesfully updated</Alert>}
+            {success &&<Alert color="success">Succesfully registered</Alert>}
             <Row>
               <Col xs={12} sm={6}>
                 <img  src={registerIcon} alt="" />

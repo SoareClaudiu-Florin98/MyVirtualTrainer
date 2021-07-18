@@ -3,47 +3,46 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyVirtualTrainer.Data.Migrations
 {
-    public partial class semicompletedatabase : Migration
+    public partial class mig1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "DiaryId",
-                table: "User",
-                type: "int",
-                nullable: true);
-
             migrationBuilder.CreateTable(
-                name: "Diary",
+                name: "Post",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PublishingDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Diary", x => x.Id);
+                    table.PrimaryKey("PK_Post", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DailyReport",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DiaryId = table.Column<int>(type: "int", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Weight = table.Column<float>(type: "real", nullable: false),
+                    Height = table.Column<float>(type: "real", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ActivityLevel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfilePicture = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DailyReport", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DailyReport_Diary_DiaryId",
-                        column: x => x.DiaryId,
-                        principalTable: "Diary",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,6 +51,7 @@ namespace MyVirtualTrainer.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Calories = table.Column<int>(type: "int", nullable: false),
                     Weight = table.Column<float>(type: "real", nullable: false),
                     Carbs = table.Column<float>(type: "real", nullable: false),
@@ -60,65 +60,36 @@ namespace MyVirtualTrainer.Data.Migrations
                     Protein = table.Column<float>(type: "real", nullable: false),
                     Calcium = table.Column<float>(type: "real", nullable: false),
                     MealType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DailyReportId = table.Column<int>(type: "int", nullable: true)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Food", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Food_DailyReport_DailyReportId",
-                        column: x => x.DailyReportId,
-                        principalTable: "DailyReport",
+                        name: "FK_Food_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_DiaryId",
-                table: "User",
-                column: "DiaryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DailyReport_DiaryId",
-                table: "DailyReport",
-                column: "DiaryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Food_DailyReportId",
+                name: "IX_Food_UserId",
                 table: "Food",
-                column: "DailyReportId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_User_Diary_DiaryId",
-                table: "User",
-                column: "DiaryId",
-                principalTable: "Diary",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_User_Diary_DiaryId",
-                table: "User");
-
             migrationBuilder.DropTable(
                 name: "Food");
 
             migrationBuilder.DropTable(
-                name: "DailyReport");
+                name: "Post");
 
             migrationBuilder.DropTable(
-                name: "Diary");
-
-            migrationBuilder.DropIndex(
-                name: "IX_User_DiaryId",
-                table: "User");
-
-            migrationBuilder.DropColumn(
-                name: "DiaryId",
-                table: "User");
+                name: "User");
         }
     }
 }

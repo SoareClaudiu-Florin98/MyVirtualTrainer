@@ -51,14 +51,12 @@ const Profile = () => {
             setActivityLevel(data.activityLevel) ; 
             setGender(data.gender) ; 
             if(data.profilePicture){
-              console.log("are pozaaaaaaaaaaa")
-              setProfileImage(`data:image/jpeg;base64,${data.profilePicture}`) ; 
+              setProfileImage(`data:image/png;base64,${data.profilePicture}`) ; 
             }
             
         });
     }, []);
     const submit = async e => {
-
       await axios.put("https://localhost:44361/user/update", {
 
                 id: id,
@@ -69,7 +67,7 @@ const Profile = () => {
                 height: height,
                 birthday : birthday,
                 activityLevel: activityLevel,
-                profilePicture : profileImage.replace("data:image/jpeg;base64,",''),               
+                profilePicture : profileImage.replace("data:image/png;base64,",''),               
                 gender: gender}, {
                   withCredentials: true
                 })
@@ -119,7 +117,7 @@ return(
         
         <Col xs={12} sm={12}  md={12} lg={6} >
             <img className= "imgleft" src={profileImage} alt = ""   />  
-            <input type="file" id="input" class="custom-file-input2" onChange={handleImageChange} accept="image/png, image/jpeg" ></input>
+            <input type="file" id="input" class="custom-file-input2" onChange={handleImageChange} accept="image/png" ></input>
         </Col> 
 
         <Col  xs={12} sm={12} md={12} lg={6} style = {{margin: 'auto'}} >

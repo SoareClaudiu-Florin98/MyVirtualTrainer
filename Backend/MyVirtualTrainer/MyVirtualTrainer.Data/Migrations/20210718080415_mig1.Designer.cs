@@ -10,8 +10,8 @@ using MyVirtualTrainer.Data.Database;
 namespace MyVirtualTrainer.Data.Migrations
 {
     [DbContext(typeof(MyVirtualTrainerDbContext))]
-    [Migration("20210629234621_semi-complete-database3")]
-    partial class semicompletedatabase3
+    [Migration("20210718080415_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,10 +50,13 @@ namespace MyVirtualTrainer.Data.Migrations
                     b.Property<string>("MealType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("Protein")
                         .HasColumnType("real");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<float>("Weight")
@@ -73,21 +76,22 @@ namespace MyVirtualTrainer.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("PublishingDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Post");
                 });
@@ -133,20 +137,13 @@ namespace MyVirtualTrainer.Data.Migrations
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Food", b =>
                 {
-                    b.HasOne("MyVirtualTrainer.Data.Entities.User", null)
+                    b.HasOne("MyVirtualTrainer.Data.Entities.User", "IdUser")
                         .WithMany("Foods")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-                });
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-            modelBuilder.Entity("MyVirtualTrainer.Data.Entities.Post", b =>
-                {
-                    b.HasOne("MyVirtualTrainer.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("User");
+                    b.Navigation("IdUser");
                 });
 
             modelBuilder.Entity("MyVirtualTrainer.Data.Entities.User", b =>

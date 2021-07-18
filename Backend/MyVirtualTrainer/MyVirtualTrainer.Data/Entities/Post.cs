@@ -12,10 +12,12 @@ namespace MyVirtualTrainer.Data.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public virtual User User { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-        public string Image { get; set; }
+        public string Category { get; set; }
+        public byte[] Image { get; set; }
+
+        public DateTime PublishingDate { get; set; }
 
     }
 }

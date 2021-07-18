@@ -67,6 +67,11 @@ namespace MyVirtualTrainer.Api
 
             services.AddScoped<IFoodService, FoodService>();
 
+
+            services.AddScoped<IPostRepository, PostRepository>();
+
+            services.AddScoped<IPostService, PostService>();
+
             services.AddScoped<MyVirtualTrainerDbContext>(); 
             services.AddMyVirtualTrainerRepositories();
             services.AddMyVirtualTrainerServices();

@@ -54,8 +54,7 @@ const Main = (props) => {
       <Route path="/register">
           <Register />
       </Route>
-      <Route path="/dashboard">
-          <Dashboard />
+      <Route path="/dashboard" component= {Dashboard}>
       </Route>
       <Route render={error} />
   </Switch>
