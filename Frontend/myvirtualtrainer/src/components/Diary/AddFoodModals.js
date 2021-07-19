@@ -6,22 +6,35 @@ import Food from "./Food" ;
 import { getUser } from "../../api";
 const AddFoodModals = (props) => {
   const [query, setQuery] = useState("");
-  const [food, setFood] = useState();
+  const [food, setFood] = useState(null);
   const [alert, setAlert] = useState("");
-
+  const [isOk, setIsOk] = useState(false);
 
   const APP_ID = "920eda1c";
   const APP_KEY = "ca59bf0c04be445009d892bb34983cb5";
   const url = `https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&nutrition-type=logging&ingr=${query}`;
   const getData = async () => {
+    setAlert("");
+    setIsOk(false) ; 
+    setFood(null) ; 
     if (query !== "") {
-      const result = await axios.get(url);
-      setFood(result.data);
-      setAlert("");
-      console.log(result.data.dietLabels)
-      if(result.data.dietLabels.length <1){
+      await axios.get(url).then((response) => {
+        setFood(response.data);
+        if(response.data.dietLabels.length >0){
+          setIsOk(true)
+        }else{
+          setIsOk(false)
+          setFood(null)
+          setAlert("Food not found!");
+        }
+
+      }) .catch((err) => {
         setAlert("Food not found!");
-      }
+        setFood(null);
+      });
+
+      
+
     } else {
       setAlert("Please fill the form");
     }
@@ -69,7 +82,7 @@ const AddFoodModals = (props) => {
       withCredentials: true
     })
     .then(response => {
-      
+      window.location.reload() ; 
 
     })
     .catch(error => {
@@ -106,10 +119,7 @@ const AddFoodModals = (props) => {
           <div class="break"></div>
           <input type="submit" value="Search" />
         </form>
-
-
-        {food&&< Food mealType ={props.mealType} food={food} />}
-
+        { isOk && food &&< Food mealType ={props.mealType} food={food} />}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleCloseButton }>

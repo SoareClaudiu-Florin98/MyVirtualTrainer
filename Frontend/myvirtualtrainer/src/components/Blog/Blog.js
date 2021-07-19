@@ -21,18 +21,16 @@ function Blog() {
   useEffect(async() => {
       axios.get("https://localhost:44361/post/getPosts").then
       (res=>{
-          console.log(res) ; 
           setPost(res.data) ; 
       })
       .catch(err=>{
-          console.log(err)
       })
       
-    })
+    },[])
   return (  
     posts.map(post=>
       <div class= "containerBlog" key = {post.id} >  
-          {popUp ? <PopUp data = {posts[index-1]} closePopUp = {closePopUp}/> : ""}  
+          {popUp ? <PopUp data = {posts.find(post=> post.id == index)} closePopUp = {closePopUp}/> : ""}  
           <div class= "image_big"
             onClick = {
               ()=>{ 
@@ -53,9 +51,12 @@ function Blog() {
           <div class ="title"> 
           {post.title}
           </div>
+          <br></br>
+          <div class ="title"> 
+          {post.category}
+          </div>
           <div class= "content">{post.content.substring(0,200)}</div>
           <div class ="person">
-              <span class="name">{post.category} - </span>
               <span class="date">{post.PublishingDate}</span>
             </div>               
       </div>

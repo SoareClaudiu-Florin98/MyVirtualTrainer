@@ -8,9 +8,12 @@ const AddPost = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [progress, setProgress] = useState(0);
-  const [showToast, setShowToast] = useState(false);
 
+  const [showToast, setShowToast] = useState(false);
   const toggleShow = () => setShowToast(!showToast);
+
+  const [showToastError, setShowToastError] = useState(false);
+  const toggleShowError = () => setShowToastError(!showToastError);
 
 
   const handleSubmit = async (e) => {
@@ -22,6 +25,22 @@ const AddPost = () => {
       description,
       image,
     };
+    if(data.title.length <1){
+      setShowToastError() ; 
+      return null ; 
+    }
+    if(data.category.length <1){
+      setShowToastError() ; 
+      return null ; 
+    }
+    if(data.description.length <1){
+      setShowToastError() ; 
+      return null ; 
+    }
+    if(data.image.length <=0){
+      setShowToastError() ; 
+      return null ; 
+    }
     await axios
       .post(
         "https://localhost:44361/post/addPost",
@@ -38,7 +57,9 @@ const AddPost = () => {
       .then((response) => {
         toggleShow() ; 
       })
-      .catch((error) => {});
+      .catch((error) => {
+        toggleShowError() ;
+      });
   };
   const handleImageChange = (event) => {
     try {
@@ -55,11 +76,22 @@ const AddPost = () => {
   return (
     <div className="container">
         <Toast show={showToast} onClose={toggleShow}  className="bg-success">
+          
           <Toast.Header>
             <strong className="me-auto">Succes</strong>
           </Toast.Header>
           <Toast.Body>The post was added successfully!</Toast.Body>
         </Toast>
+
+        <Toast show={showToastError} onClose={toggleShowError}  className="bg-danger">
+          
+          <Toast.Header>
+            <strong className="me-auto">Failed </strong>
+          </Toast.Header>
+          <Toast.Body>The post must have all the elements completed!</Toast.Body>
+        </Toast>
+
+
       <div className="row">
         <div className="col-md-12 mb-3">
           <h1 className="display-3 text-dark text-center">Add Blog Post</h1>

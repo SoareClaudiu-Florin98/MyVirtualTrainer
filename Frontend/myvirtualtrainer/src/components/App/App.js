@@ -5,6 +5,7 @@ import { getUser } from "../../api";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [email, setEmail] = useState(null);
 
   const handleLogin = () => {
       setIsLoggedIn(true);
@@ -24,13 +25,14 @@ useEffect(() => {
 useEffect(() => {
   if (userData) {
       setIsLoggedIn(true);
+      setEmail(userData.email);
   } else {
       setIsLoggedIn(false);
   }
 }, [userData]);
   return (
     <div className="App">
-      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
+      <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} email = {email}/>
       <Main 
           userId={userData ? userData.id : ""}
           isLoggedIn={isLoggedIn}

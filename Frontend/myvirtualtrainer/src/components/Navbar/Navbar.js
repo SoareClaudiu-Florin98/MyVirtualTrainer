@@ -11,24 +11,25 @@ const MenuIsLoggedIn = props => {
   const onLogout = () => {
     document.cookie ="jwt=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     props.handleLogout();
-    <Redirect to="/" />
 };
 return(
 <React.Fragment>
 <Nav className="mr-auto">
+
+
+      {props.email == 'soareclaudiu18@stud.ase.ro'&& <Nav.Link id='underline' href="/dashboard">Dashboard</Nav.Link>}
       <Nav.Link id='underline' href="/about">About</Nav.Link>
       <Nav.Link id='underline' href="/blog">Blog</Nav.Link>
       <Nav.Link id='underline' href="/before_and_after">Before and After</Nav.Link>
       <Nav.Link id='underline' href="/foods">Foods</Nav.Link>
       <NavDropdown title="Profile" id="collasible-nav-dropdown">
         <NavDropdown.Item  href="/profile">My Profile</NavDropdown.Item>
-        <NavDropdown.Item  href="/maps">Maps</NavDropdown.Item>
         <NavDropdown.Item  href="/diary">Diary</NavDropdown.Item>
         <NavDropdown.Item href="/reports">Reports</NavDropdown.Item>
       </NavDropdown>
     </Nav>  
     <Nav>
-      <Nav.Link>
+      <Nav.Link href="/">
       <button type="button"className="btn btn-primary" onClick={onLogout}>Logout</button>
       </Nav.Link>
 </Nav>
@@ -57,7 +58,7 @@ return(
 
 const Navigation = (props) => {
 
-  const { isLoggedIn, handleLogout } = props;
+  const { isLoggedIn, handleLogout ,email } = props;
 
 
   return (
@@ -76,7 +77,7 @@ const Navigation = (props) => {
   <Navbar.Collapse id="responsive-navbar-nav" >
 
   {isLoggedIn ? (
-                    <MenuIsLoggedIn handleLogout={handleLogout} />
+                    <MenuIsLoggedIn handleLogout={handleLogout} email = {email}/>
                 ) : (
                         <MenuIsNotLoggedIn />
                 )}
